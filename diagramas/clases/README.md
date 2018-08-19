@@ -1,3 +1,3 @@
-# Casos de uso
-## Subsistema de Clientes
-![enter image description here](https://github.com/ChamHerz/transport/blob/master/diagramas/caso%20de%20uso/images/cu-clientes.png)
+# Diagrama de Clases
+
+![Diagrama de clases](https://github.com/ChamHerz/transport/blob/master/diagramas/clases/images/Diagrama%20de%20Clases.png)
