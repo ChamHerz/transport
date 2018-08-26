@@ -1,21 +1,23 @@
 package forms;
 
 import controles.BarraHerramientas;
+import controles.Ventana;
+import util.VentanaUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.net.URL;
 
 public class FormPrincipal extends JFrame {
-
     private JDesktopPane desktopPanel;
-    private JButton botonEjemplo;
+    private FormChofer formChofer;
+    private FormConfiguracion formConfiguracion;
 
     public FormPrincipal() throws HeadlessException {
         this.setTitle("Transport");
-        // this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setExtendedState(MAXIMIZED_BOTH);
 
         this.addWindowListener( new SalirSistema() );
@@ -24,10 +26,34 @@ public class FormPrincipal extends JFrame {
         this.getContentPane().add(desktopPanel);
 
         BarraHerramientas barraHerramientas = new BarraHerramientas();
+        barraHerramientas.setEventoBotonChofer(eventoClickBarraConductor());
+        barraHerramientas.setEventoBotonSetting(eventoClickBarraSetting());
         this.getContentPane().add(barraHerramientas, BorderLayout.NORTH);
 
-        //barraHerramientas.addAncestorListener();
+    }
 
+    public ActionListener eventoClickBarraConductor(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("apreto el boton chofer de barra herramientas");
+                if (formChofer == null) {
+                    formChofer = new FormChofer();
+                }
+                VentanaUtil.monstrarVentana(desktopPanel,formChofer);
+            }
+        };
+    }
+
+    public ActionListener eventoClickBarraSetting(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("apreto el boton chofer de barra configuracion");
+                if (formConfiguracion == null) {
+                    formConfiguracion = new FormConfiguracion();
+                }
+                VentanaUtil.monstrarVentana(desktopPanel,formConfiguracion);
+            }
+        };
     }
 }
 
