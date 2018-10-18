@@ -9,15 +9,20 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingUtilities;
+
+
 
 import transport.control.BarraHerramienta;
 import transport.control.TabPanel;
+import transport.panel.BultoPanel;
+import transport.panel.CamionPanel;
+import transport.panel.CiudadPanel;
+import transport.panel.ClientePanel;
 import transport.panel.ConductorPanel;
 import transport.panel.ConfigPanel;
-import transport.panel.PanelDe;
+import transport.panel.PedidoPanel;
+import transport.panel.RemolquePanel;
+import transport.panel.RutaPanel;
 
 public class FormPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -28,10 +33,19 @@ public class FormPrincipal extends JFrame {
 	
 	private ConductorPanel conductorPanel;
 	private ConfigPanel configPanel;
+	private CamionPanel camionPanel;
+	private RemolquePanel remolquePanel;
+	private BultoPanel bultoPanel;
+	private CiudadPanel ciudadPanel;
+	private ClientePanel clientePanel;
+	private PedidoPanel pedidoPanel;
+	private RutaPanel rutaPanel;
 	
 	public FormPrincipal() throws HeadlessException {
         this.setTitle("Transport");
-        this.setExtendedState(MAXIMIZED_BOTH);
+        //this.setExtendedState(MAXIMIZED_BOTH);
+        this.setSize(800, 600);
+        this.setLocation(800, 100);
 
         this.addWindowListener( new SalirSistema() );
 
@@ -41,6 +55,13 @@ public class FormPrincipal extends JFrame {
         barraHerramientas = new BarraHerramienta();
         barraHerramientas.setEventoBotonChofer(eventoClickBarraConductor());
         barraHerramientas.setEventoBotonSetting(eventoClickBarraSetting());
+        barraHerramientas.setEventoBotonCamion(eventoClickBarraCamion());
+        barraHerramientas.setEventoBotonRemoque(eventoClickBarraRemolque());
+        barraHerramientas.setEventoBotonBulto(eventoClickBarraBulto());
+        barraHerramientas.setEventoBotonCiudad(eventoClickBarraCiudad());
+        barraHerramientas.setEventoBotonCliente(eventoClickBarraCliente());
+        barraHerramientas.setEventoBotonPedido(eventoClickBarraPedido());
+        barraHerramientas.setEventoBotonRuta(eventoClickBarraRuta());
         this.getContentPane().add(barraHerramientas, BorderLayout.NORTH);
         
         tabPanel = new TabPanel();
@@ -50,13 +71,19 @@ public class FormPrincipal extends JFrame {
         
         conductorPanel = new ConductorPanel();
         configPanel = new ConfigPanel();
+        camionPanel = new CamionPanel();
+        remolquePanel = new RemolquePanel();
+        bultoPanel = new BultoPanel();
+        ciudadPanel = new CiudadPanel();
+        clientePanel = new ClientePanel();
+        pedidoPanel = new PedidoPanel();
+        rutaPanel = new RutaPanel();
 	}
 	
 	
 	public ActionListener eventoClickBarraConductor(){
         return new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("apreto el boton chofer de barra herramientas");
                 tabPanel.showPanel(conductorPanel);
             }
         };
@@ -65,8 +92,63 @@ public class FormPrincipal extends JFrame {
     public ActionListener eventoClickBarraSetting(){
         return new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("apreto el boton chofer de barra configuracion");
                 tabPanel.showPanel(configPanel);
+            }
+        };
+    }
+    
+    public ActionListener eventoClickBarraCamion(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tabPanel.showPanel(camionPanel);
+            }
+        };
+    }
+    
+    public ActionListener eventoClickBarraRemolque(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tabPanel.showPanel(remolquePanel);
+            }
+        };
+    }
+    
+    public ActionListener eventoClickBarraBulto(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tabPanel.showPanel(bultoPanel);
+            }
+        };
+    }
+    
+    public ActionListener eventoClickBarraCiudad(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tabPanel.showPanel(ciudadPanel);
+            }
+        };
+    }
+    
+    public ActionListener eventoClickBarraCliente(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tabPanel.showPanel(clientePanel);
+            }
+        };
+    }
+
+    public ActionListener eventoClickBarraPedido(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tabPanel.showPanel(pedidoPanel);
+            }
+        };
+    }
+    
+    public ActionListener eventoClickBarraRuta(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tabPanel.showPanel(rutaPanel);
             }
         };
     }

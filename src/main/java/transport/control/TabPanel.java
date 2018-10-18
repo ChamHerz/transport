@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import transport.panel.ConductorPanel;
-import transport.panel.PanelDe;
 
 public class TabPanel {
 	private JTabbedPane jTabbedPane;

@@ -13,5 +13,13 @@
         <property name="show_sql">false</property>
         <property name="hibernate.jdbc.batch_size">20</property>
         <mapping class="transport.model.Sistema"/>
+        <mapping class="transport.model.Conductor"/>
+        <mapping class="transport.model.Camion"/>
+        <mapping class="transport.model.Remolque"/>
+        <mapping class="transport.model.Bulto"/>
+        <mapping class="transport.model.Ciudad"/>
+        <mapping class="transport.model.Cliente"/>
+        <mapping class="transport.model.Pedido"/>
+        <mapping class="transport.model.Ruta"/>
     </session-factory>
 </hibernate-configuration>
