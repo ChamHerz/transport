@@ -36,16 +36,16 @@ public class BarraHerramienta extends JToolBar {
         botonMovCaja = new BarraBoton("Movimiento de Caja","/images/icon-caja.png");
         botonTarifa = new BarraBoton("Tarifa","/images/icon-tarifa.png");
 
+        this.add(botonPedido);
+        this.add(botonHojaRuta);
         this.add(botonConductor);
         this.add(botonCamion);
         this.add(botonRemolque);
         this.add(botonBulto);
-        this.add(botonPedido);
         this.add(botonCliente);
         this.add(botonCiudad);
         this.add(botonCarretera);
         this.add(botonRuta);
-        this.add(botonHojaRuta);
         this.add(botonMovCaja);
         this.add(botonTarifa);
         this.add(botonSetting);

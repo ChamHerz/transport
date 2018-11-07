@@ -10,6 +10,14 @@ import transport.model.Ciudad;
 
 public class CiudadDAO {
 	
+	public Ciudad get(int idCiudad) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Ciudad ciudad = (Ciudad) session.get(Ciudad.class, idCiudad);
+		session.getTransaction().commit();
+		return ciudad;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Ciudad> getCiudades() {
 		Session session = HibernateUtil.getSessionFactory().openSession();

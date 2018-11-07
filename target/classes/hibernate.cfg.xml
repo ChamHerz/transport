@@ -21,5 +21,8 @@
         <mapping class="transport.model.Cliente"/>
         <mapping class="transport.model.Pedido"/>
         <mapping class="transport.model.Ruta"/>
+        <mapping class="transport.model.Carretera"/>
+        <mapping class="transport.model.Tarifa"/>
+        <mapping class="transport.model.HojaRuta"/>
     </session-factory>
 </hibernate-configuration>

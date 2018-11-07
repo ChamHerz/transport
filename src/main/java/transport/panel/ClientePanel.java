@@ -10,17 +10,18 @@ import javax.swing.JScrollPane;
 import transport.dao.ClienteDAO;
 import transport.model.Cliente;
 import transport.table.ClienteTable;
+import transport.table.MiScrollTable;
 
 public class ClientePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private JScrollPane barraClienteTable;
+	private MiScrollTable barraClienteTable;
 	private ClienteTable clienteTable;
 	
 	@SuppressWarnings("unused")
 	public ClientePanel() {
 		super();
 		clienteTable = new ClienteTable();
-		barraClienteTable = new JScrollPane(clienteTable);
+		barraClienteTable = new MiScrollTable(clienteTable);
 		
 		this.setName("Clientes");
 				

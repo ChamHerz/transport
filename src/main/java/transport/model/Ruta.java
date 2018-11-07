@@ -17,7 +17,7 @@ public class Ruta {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id_ruta")
+	@Column(name = "idRuta")
 	public int getIdRuta() {
 		return idRuta;
 	}
@@ -26,7 +26,7 @@ public class Ruta {
 	}
 	
 	@Basic
-	@Column(name = "nombre")
+	@Column(name = "descripcion")
 	public String getNombre() {
 		return nombre;
 	}

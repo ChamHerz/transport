@@ -10,6 +10,22 @@ import transport.model.Pedido;
 
 public class PedidoDAO {
 	
+	public Integer addPedido(Pedido pedido) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.save(pedido);
+		session.getTransaction().commit();
+		return pedido.getIdPedido();
+	}
+	
+	public Pedido getPedido(int idPedido) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Pedido pedido = (Pedido) session.get(Pedido.class, idPedido);
+		session.getTransaction().commit();
+		return pedido;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Pedido> getPedidos() {
 		Session session = HibernateUtil.getSessionFactory().openSession();

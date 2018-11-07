@@ -14,10 +14,10 @@ import javax.persistence.Transient;
 public class Ciudad {
 	private int idCiudad;
 	private String nombre;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id_ciudad")
+	@Column(name = "idCiudad")
 	public int getIdCiudad() {
 		return idCiudad;
 	}

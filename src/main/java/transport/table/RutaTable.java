@@ -10,19 +10,21 @@ import transport.model.Ruta;
 import transport.util.Columna;
 import transport.util.Columnas;
 
-public class RutaTable extends JTable {
-	private DefaultTableModel modeloTabla;
+public class RutaTable extends MiTabla {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private MiModelTable modeloTabla;
 	private Columnas columnas = new Columnas();
 	
 	public RutaTable() {
 		super();
-		//this.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			
 		columnas.agregar(new Columna("ID",35));
-		columnas.agregar(new Columna("NOMBRE",150));
+		columnas.agregar(new Columna("DESCRIPCION",150));
 			
-		modeloTabla = new DefaultTableModel(columnas.getNombresColumnas(),0);
-		modeloTabla = new DefaultTableModel();
+		modeloTabla = new MiModelTable();
 		modeloTabla.setColumnIdentifiers(columnas.getNombresColumnas());
 		
 		this.setModel(modeloTabla);

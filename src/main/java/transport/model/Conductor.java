@@ -24,10 +24,13 @@ public class Conductor {
 	private String telefono;
 	private Integer idCamion;
 	private Camion camion;
+	private String tipoConductor;
+	private Integer idTarifa;
+	private Tarifa tarifa;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id_conductor")
+	@Column(name = "idConductor")
 	public int getIdConductor() {
 		return idConductor;
 	}
@@ -90,7 +93,7 @@ public class Conductor {
 	}
 	
 	@Basic
-	@Column(name = "id_camion", nullable = true)
+	@Column(name = "idCamion", nullable = true)
 	public Integer getIdCamion() {
 		return idCamion;
 	}
@@ -99,7 +102,7 @@ public class Conductor {
 	}
 	
 	@ManyToOne(targetEntity = Camion.class, optional = true)
-    @JoinColumn(name = "id_camion",referencedColumnName="id_camion",
+    @JoinColumn(name = "idCamion",referencedColumnName="idCamion",
     insertable = false, updatable = false, nullable = true)
 	public Camion getCamion() {
 		return camion;
@@ -107,6 +110,35 @@ public class Conductor {
 	public void setCamion(Camion camion) {
 		this.camion = camion;
 	}
+	
+	@Basic
+	@Column(name = "tipoConductor", nullable = true)	
+	public String getTipoConductor() {
+		return tipoConductor;
+	}
+	public void setTipoConductor(String tipoConductor) {
+		this.tipoConductor = tipoConductor;
+	}
+	
+	@Basic
+	@Column(name = "idTarifa", nullable = true)
+	public Integer getIdTarifa() {
+		return idTarifa;
+	}
+	public void setIdTarifa(Integer idTarifa) {
+		this.idTarifa = idTarifa;
+	}
+	
+	@ManyToOne(targetEntity = Tarifa.class, optional = true)
+    @JoinColumn(name = "idTarifa",referencedColumnName="idTarifa",
+    insertable = false, updatable = false, nullable = true)
+	public Tarifa getTarifa() {
+		return tarifa;
+	}
+	public void setTarifa(Tarifa tarifa) {
+		this.tarifa = tarifa;
+	}
+	
 	
 	@Transient
 	public Object[] getObject() {
@@ -118,7 +150,8 @@ public class Conductor {
 				direccion,
 				provincia,
 				telefono,
-				(camion == null) ? "" : camion.getMatricula()
+				(camion == null) ? "" : camion.getMatricula(),
+				tipoConductor
 		};
 		return item;
 	}

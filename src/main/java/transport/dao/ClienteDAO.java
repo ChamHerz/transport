@@ -10,6 +10,14 @@ import transport.model.Cliente;
 
 public class ClienteDAO {
 	
+	public Cliente getCliente(int idCliente) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Cliente cliente = (Cliente) session.get(Cliente.class, idCliente);
+		session.getTransaction().commit();
+		return cliente;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Cliente> getClientes() {
 		Session session = HibernateUtil.getSessionFactory().openSession();

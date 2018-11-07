@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "cliente")
 public class Cliente {
-	private int idCliente;
+	private Integer idCliente;
 	private String nombre;
 	private String apellido;
 	private String direccion;
@@ -20,11 +20,11 @@ public class Cliente {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id_cliente")
-	public int getIdCliente() {
+	@Column(name = "idCliente")
+	public Integer getIdCliente() {
 		return idCliente;
 	}
-	public void setIdCliente(int idCliente) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 	

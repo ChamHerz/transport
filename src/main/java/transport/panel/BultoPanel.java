@@ -10,19 +10,19 @@ import javax.swing.JScrollPane;
 import transport.dao.BultoDAO;
 import transport.model.Bulto;
 import transport.table.BultoTable;
+import transport.table.MiScrollTable;
 
 public class BultoPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private JScrollPane barraBultoTable;
+	private MiScrollTable barraBultoTable;
 	private BultoTable bultoTable;
 	
-	@SuppressWarnings("unused")
 	public BultoPanel() {
 		super();
 		bultoTable = new BultoTable();
-		barraBultoTable = new JScrollPane(bultoTable);
+		barraBultoTable = new MiScrollTable(bultoTable);
 		
-		this.setName("Remolques");
+		this.setName("Bultos");
 				
 		BultoDAO bultoDAO = new BultoDAO();
 		List<Bulto> bultos = bultoDAO.getBultos();	

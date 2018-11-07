@@ -10,22 +10,24 @@ import transport.model.Camion;
 import transport.util.Columna;
 import transport.util.Columnas;
 
-public class CamionTable extends JTable {
-	private DefaultTableModel modeloTabla;
+public class CamionTable extends MiTabla {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private MiModelTable modeloTabla;
 	private Columnas columnas = new Columnas();
 	
 	public CamionTable() {
 		super();
-		//this.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			
 		columnas.agregar(new Columna("ID",35));
 		columnas.agregar(new Columna("MATRICULA",150));
 		columnas.agregar(new Columna("PESO MAXIMO",150));
+		columnas.agregar(new Columna("PESO ACTUAL",150));
 		columnas.agregar(new Columna("KM/H",150));
 		
-		
-		modeloTabla = new DefaultTableModel(columnas.getNombresColumnas(),0);
-		modeloTabla = new DefaultTableModel();
+		modeloTabla = new MiModelTable();
 		modeloTabla.setColumnIdentifiers(columnas.getNombresColumnas());
 		
 		this.setModel(modeloTabla);

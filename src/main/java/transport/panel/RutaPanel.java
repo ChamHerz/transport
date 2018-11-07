@@ -9,18 +9,19 @@ import javax.swing.JScrollPane;
 
 import transport.dao.RutaDAO;
 import transport.model.Ruta;
+import transport.table.MiScrollTable;
 import transport.table.RutaTable;
 
 public class RutaPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private JScrollPane barraRutaTable;
+	private MiScrollTable barraRutaTable;
 	private RutaTable rutaTable;
 	
 	@SuppressWarnings("unused")
 	public RutaPanel() {
 		super();
 		rutaTable = new RutaTable();
-		barraRutaTable = new JScrollPane(rutaTable);
+		barraRutaTable = new MiScrollTable(rutaTable);
 		
 		this.setName("Clientes");
 				

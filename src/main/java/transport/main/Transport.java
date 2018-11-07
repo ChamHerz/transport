@@ -8,18 +8,22 @@ public class Transport {
 	//OBJETOS
 	private Sistema sistema;
 	//FORMULARIOS
-	private FormPrincipal formPrincipal;
+	private static FormPrincipal formPrincipal;
 	
 	public Transport() {
 		SistemaDAO sistemaDAO = new SistemaDAO();
 		this.sistema = sistemaDAO.getSistema();
 		
-		this.formPrincipal = new FormPrincipal();
+		Transport.formPrincipal = new FormPrincipal();
 	}
 
 	public void iniciar() {
 		System.out.println(this.sistema.getAutor());
 		
-		this.formPrincipal.setVisible(true);
+		Transport.formPrincipal.setVisible(true);
+	}
+	
+	public static FormPrincipal getFormPrincipal() {
+		return formPrincipal;
 	}
 }

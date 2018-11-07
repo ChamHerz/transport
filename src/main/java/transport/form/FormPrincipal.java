@@ -20,6 +20,7 @@ import transport.panel.CiudadPanel;
 import transport.panel.ClientePanel;
 import transport.panel.ConductorPanel;
 import transport.panel.ConfigPanel;
+import transport.panel.HojaRutaPanel;
 import transport.panel.PedidoPanel;
 import transport.panel.RemolquePanel;
 import transport.panel.RutaPanel;
@@ -40,12 +41,13 @@ public class FormPrincipal extends JFrame {
 	private ClientePanel clientePanel;
 	private PedidoPanel pedidoPanel;
 	private RutaPanel rutaPanel;
+	private HojaRutaPanel hojaRutaPanel;
 	
 	public FormPrincipal() throws HeadlessException {
         this.setTitle("Transport");
         //this.setExtendedState(MAXIMIZED_BOTH);
         this.setSize(800, 600);
-        this.setLocation(800, 100);
+        this.setLocation(2400, 100);
 
         this.addWindowListener( new SalirSistema() );
 
@@ -62,6 +64,7 @@ public class FormPrincipal extends JFrame {
         barraHerramientas.setEventoBotonCliente(eventoClickBarraCliente());
         barraHerramientas.setEventoBotonPedido(eventoClickBarraPedido());
         barraHerramientas.setEventoBotonRuta(eventoClickBarraRuta());
+        barraHerramientas.setEventoBotonHojaRuta(eventoClickBarraHojaRuta());
         this.getContentPane().add(barraHerramientas, BorderLayout.NORTH);
         
         tabPanel = new TabPanel();
@@ -78,6 +81,7 @@ public class FormPrincipal extends JFrame {
         clientePanel = new ClientePanel();
         pedidoPanel = new PedidoPanel();
         rutaPanel = new RutaPanel();
+        hojaRutaPanel = new HojaRutaPanel();
 	}
 	
 	
@@ -149,6 +153,14 @@ public class FormPrincipal extends JFrame {
         return new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 tabPanel.showPanel(rutaPanel);
+            }
+        };
+    }
+    
+    public ActionListener eventoClickBarraHojaRuta(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tabPanel.showPanel(hojaRutaPanel);
             }
         };
     }

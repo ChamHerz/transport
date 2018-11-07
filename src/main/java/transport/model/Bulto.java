@@ -17,15 +17,20 @@ import javax.persistence.Transient;
 @Table(name = "bulto")
 public class Bulto {
 	private int idBulto;
+	private Integer idPedido;
 	private Integer idCiudadOrigen;
 	private Ciudad ciudadOrigen;
 	private Integer idCiudadDestino;
 	private Ciudad ciudadDestino;
 	private BigDecimal pesoKG;
+	private BigDecimal volumenM3;
+	private BigDecimal distanciaKM;
+	private BigDecimal costo;
+	private Integer idEstado;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id_bulto")
+	@Column(name = "idBulto")
 	public int getIdBulto() {
 		return idBulto;
 	}
@@ -34,7 +39,16 @@ public class Bulto {
 	}
 	
 	@Basic
-	@Column(name = "id_ciudad_origen")
+	@Column(name = "idPedido")
+	public Integer getIdPedido() {
+		return idPedido;
+	}
+	public void setIdPedido(Integer idPedido) {
+		this.idPedido = idPedido;
+	}
+	
+	@Basic
+	@Column(name = "idCiudadOrigen")
 	public Integer getIdCiudadOrigen() {
 		return idCiudadOrigen;
 	}
@@ -43,7 +57,7 @@ public class Bulto {
 	}
 	
 	@ManyToOne(targetEntity = Ciudad.class, optional = true)
-    @JoinColumn(name = "id_ciudad_origen",referencedColumnName="id_ciudad",
+    @JoinColumn(name = "idCiudadOrigen",referencedColumnName="idCiudad",
     insertable = false, updatable = false, nullable = true)
 	public Ciudad getCiudadOrigen() {
 		return ciudadOrigen;
@@ -53,7 +67,7 @@ public class Bulto {
 	}
 	
 	@Basic
-	@Column(name = "id_ciudad_destino")
+	@Column(name = "idCiudadDestino")
 	public Integer getIdCiudadDestino() {
 		return idCiudadDestino;
 	}
@@ -62,7 +76,7 @@ public class Bulto {
 	}
 	
 	@ManyToOne(targetEntity = Ciudad.class, optional = true)
-    @JoinColumn(name = "id_ciudad_destino",referencedColumnName="id_ciudad",
+    @JoinColumn(name = "idCiudadDestino",referencedColumnName="idCiudad",
     insertable = false, updatable = false, nullable = true)
 	public Ciudad getCiudadDestino() {
 		return ciudadDestino;
@@ -80,13 +94,52 @@ public class Bulto {
 		this.pesoKG = pesoKG;
 	}
 	
+	@Basic
+	@Column(name = "volumenM3")
+	public BigDecimal getVolumenM3() {
+		return volumenM3;
+	}
+	public void setVolumenM3(BigDecimal volumenM3) {
+		this.volumenM3 = volumenM3;
+	}
+	
+	@Basic
+	@Column(name = "distanciaKM")
+	public BigDecimal getDistanciaKM() {
+		return distanciaKM;
+	}
+	public void setDistanciaKM(BigDecimal distanciaKM) {
+		this.distanciaKM = distanciaKM;
+	}
+	
+	@Basic
+	@Column(name = "costo")
+	public BigDecimal getCosto() {
+		return costo;
+	}
+	public void setCosto(BigDecimal costo) {
+		this.costo = costo;
+	}
+	
+	@Basic
+	@Column(name = "idEstado")
+	public Integer getIdEstado() {
+		return idEstado;
+	}
+	public void setIdEstado(Integer idEstado) {
+		this.idEstado = idEstado;
+	}
+	
 	@Transient
 	public Object[] getObject() {
 		Object[] item = {
 				idBulto,
 				(ciudadOrigen == null) ? "" : ciudadOrigen.getNombre(),
 				(ciudadDestino == null) ? "" : ciudadDestino.getNombre(),
-				pesoKG
+				pesoKG,
+				volumenM3,
+				distanciaKM,
+				costo
 		};
 		return item;
 	}

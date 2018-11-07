@@ -17,11 +17,12 @@ public class Camion {
 	private int idCamion;
 	private String matricula;
 	private BigDecimal pesoMaximo;
+	private BigDecimal pesoActual;
 	private BigDecimal kmPorHoraMedio;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id_camion")
+	@Column(name = "idCamion")
 	public int getIdCamion() {
 		return idCamion;
 	}
@@ -48,6 +49,15 @@ public class Camion {
 	}
 	
 	@Basic
+	@Column(name = "pesoActual")
+	public BigDecimal getPesoActual() {
+		return pesoActual;
+	}
+	public void setPesoActual(BigDecimal pesoActual) {
+		this.pesoActual = pesoActual;
+	}
+	
+	@Basic
 	@Column(name = "kmPorHoraMedio")
 	public BigDecimal getKmPorHoraMedio() {
 		return kmPorHoraMedio;
@@ -62,6 +72,7 @@ public class Camion {
 				idCamion,
 				matricula,
 				pesoMaximo,
+				pesoActual,
 				kmPorHoraMedio
 		};
 		return item;

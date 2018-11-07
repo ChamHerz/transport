@@ -11,6 +11,10 @@ import transport.util.Columna;
 import transport.util.Columnas;
 
 public class ConductorTable extends JTable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private DefaultTableModel modeloTabla;
 	private Columnas columnas = new Columnas();
 	
@@ -26,7 +30,7 @@ public class ConductorTable extends JTable {
 		columnas.agregar(new Columna("PROVINCIA",150));
 		columnas.agregar(new Columna("TELEFONO",150));
 		columnas.agregar(new Columna("CAMION",150));
-		
+		columnas.agregar(new Columna("TIPO",150));
 		
 		modeloTabla = new DefaultTableModel(columnas.getNombresColumnas(),0);
 		modeloTabla = new DefaultTableModel();

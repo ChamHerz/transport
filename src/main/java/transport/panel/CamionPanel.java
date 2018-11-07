@@ -10,17 +10,18 @@ import javax.swing.JScrollPane;
 import transport.dao.CamionDAO;
 import transport.model.Camion;
 import transport.table.CamionTable;
+import transport.table.MiScrollTable;
 
 public class CamionPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private JScrollPane barraCamionTable;
+	private MiScrollTable barraCamionTable;
 	private CamionTable camionTable;
 	
 	@SuppressWarnings("unused")
 	public CamionPanel() {
 		super();
 		camionTable = new CamionTable();
-		barraCamionTable = new JScrollPane(camionTable);
+		barraCamionTable = new MiScrollTable(camionTable);
 		
 		this.setName("Camiones");
 				
