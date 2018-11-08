@@ -10,17 +10,16 @@ import transport.model.Conductor;
 import transport.util.Columna;
 import transport.util.Columnas;
 
-public class ConductorTable extends JTable {
+public class ConductorTable extends MiTabla {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private DefaultTableModel modeloTabla;
+	private MiModelTable modeloTabla;
 	private Columnas columnas = new Columnas();
 	
 	public ConductorTable() {
 		super();
-		//this.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			
 		columnas.agregar(new Columna("ID",35));
 		columnas.agregar(new Columna("NOMBRE",150));
@@ -32,8 +31,7 @@ public class ConductorTable extends JTable {
 		columnas.agregar(new Columna("CAMION",150));
 		columnas.agregar(new Columna("TIPO",150));
 		
-		modeloTabla = new DefaultTableModel(columnas.getNombresColumnas(),0);
-		modeloTabla = new DefaultTableModel();
+		modeloTabla = new MiModelTable();
 		modeloTabla.setColumnIdentifiers(columnas.getNombresColumnas());
 		
 		this.setModel(modeloTabla);

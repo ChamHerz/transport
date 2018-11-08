@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import transport.model.Bulto;
+import transport.model.Remolque;
 import transport.util.Columna;
 import transport.util.Columnas;
 
@@ -27,10 +28,12 @@ public class BultoTable extends MiTabla {
 		columnas.agregar(new Columna("ID",35));
 		columnas.agregar(new Columna("CIUDAD ORIGEN",150));
 		columnas.agregar(new Columna("CIUDAD DESTINO",150));
-		columnas.agregar(new Columna("PESO KG",150));
-		columnas.agregar(new Columna("VOLUMEN M3",150));
-		columnas.agregar(new Columna("DISTANCIA KM",150));
-		columnas.agregar(new Columna("COSTO",150));
+		columnas.agregar(new Columna("ESTADO",100));
+		columnas.agregar(new Columna("ID REMOLQUE",35));
+		columnas.agregar(new Columna("PESO KG",100));
+		columnas.agregar(new Columna("VOLUMEN M3",100));
+		columnas.agregar(new Columna("DISTANCIA KM",100));
+		columnas.agregar(new Columna("COSTO",100));
 			
 		modeloTabla = new MiModelTable();
 		modeloTabla.setColumnIdentifiers(columnas.getNombresColumnas());
@@ -57,6 +60,12 @@ public class BultoTable extends MiTabla {
 	public void agregarTodos(List<Bulto> bultos) {
 		for (Bulto bulto : bultos)
 			modeloTabla.addRow(bulto.getObject());
+	}
+	
+	public void agregarDesdeRemolques(List<Remolque> remolques) {
+		for (Remolque remolque : remolques) {
+			this.agregarTodos(remolque.getBultos());
+		}
 	}
 	
 	public void borrarTodoLuegoAgregar(List<Bulto> bultos) {

@@ -8,11 +8,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import transport.model.Bulto;
 import transport.model.Camion;
+import transport.model.RutaDetalle;
 import transport.util.Columna;
 import transport.util.Columnas;
 
-public class CamionTable extends MiTabla {
+public class RutaDetalleTable extends MiTabla {
 	/**
 	 * 
 	 */
@@ -22,14 +24,13 @@ public class CamionTable extends MiTabla {
 	private static final DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 	
 	
-	public CamionTable() {
+	public RutaDetalleTable() {
 		super();
 			
-		columnas.agregar(new Columna("ID",35));
-		columnas.agregar(new Columna("MATRICULA",150));
-		columnas.agregar(new Columna("PESO MAXIMO",150));
-		columnas.agregar(new Columna("PESO ACTUAL",150));
-		columnas.agregar(new Columna("KM/H",150));
+		//columnas.agregar(new Columna("ID",35));
+		//columnas.agregar(new Columna("ID RUTA",150));
+		columnas.agregar(new Columna("ORDEN",20));
+		columnas.agregar(new Columna("ID CIUDAD",100));
 		
 		modeloTabla = new MiModelTable();
 		modeloTabla.setColumnIdentifiers(columnas.getNombresColumnas());
@@ -44,15 +45,19 @@ public class CamionTable extends MiTabla {
 		}
 		this.getTableHeader().setFont(new Font("Lucida Sans Demibold", Font.BOLD, 12));
 		
-		//alinear campos a la derecha
-		rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
-		getColumnModel().getColumn(this.getColumn("PESO MAXIMO").getModelIndex()).setCellRenderer(rightRenderer);
-		getColumnModel().getColumn(this.getColumn("PESO ACTUAL").getModelIndex()).setCellRenderer(rightRenderer);
-		getColumnModel().getColumn(this.getColumn("KM/H").getModelIndex()).setCellRenderer(rightRenderer);
 	}
 	
-	public void agregarTodos(List<Camion> camiones) {
-		for (Camion camion : camiones)
-			modeloTabla.addRow(camion.getObject());
+	public void agregarTodos(List<RutaDetalle> rutaDetalles) {
+		for (RutaDetalle rutaDetalle : rutaDetalles)
+			modeloTabla.addRow(rutaDetalle.getObject());
+	}
+	
+	public void borrarTodoLuegoAgregar(List<RutaDetalle> rutaDetalles) {
+		for (int i = 0; i < getRowCount(); i++) {
+			modeloTabla.removeRow(i);
+			i-=1;
+		}
+		for (RutaDetalle rutaDetalle : rutaDetalles)
+			modeloTabla.addRow(rutaDetalle.getObject());
 	}
 }

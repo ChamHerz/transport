@@ -17,13 +17,12 @@ public class RutaPanel extends JPanel {
 	private MiScrollTable barraRutaTable;
 	private RutaTable rutaTable;
 	
-	@SuppressWarnings("unused")
 	public RutaPanel() {
 		super();
 		rutaTable = new RutaTable();
 		barraRutaTable = new MiScrollTable(rutaTable);
 		
-		this.setName("Clientes");
+		this.setName("Rutas");
 				
 		RutaDAO	rutaDAO = new RutaDAO();
 		List<Ruta> rutas = rutaDAO.getRutas();	

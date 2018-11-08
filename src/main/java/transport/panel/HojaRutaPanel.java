@@ -1,32 +1,19 @@
 package transport.panel;
 
 import java.awt.BorderLayout;
-import java.awt.Cursor;
-import java.awt.Dialog;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import transport.control.BotonNormal;
 import transport.dao.HojaRutaDAO;
-import transport.dao.PedidoDAO;
+import transport.form.FormHojaRutaAgregar;
 import transport.form.FormHojaRutaDetalle;
-import transport.form.FormPedidoAgregar;
-import transport.form.FormPedidoDetalle;
-import transport.main.Transport;
 import transport.model.HojaRuta;
-import transport.model.Pedido;
 import transport.table.HojaRutaTable;
 import transport.table.MiScrollTable;
-import transport.table.PedidoTable;
 
 public class HojaRutaPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -57,7 +44,7 @@ public class HojaRutaPanel extends JPanel {
 		panelBotones.add(botonAdd,BorderLayout.SOUTH);
 		panelDerecho.add(panelBotones,BorderLayout.NORTH);
 		botonDetalle.addActionListener(eventoBotonDetalle());
-		//botonAdd.addActionListener(eventoBotonAdd());
+		botonAdd.addActionListener(eventoBotonAdd());
 		add(barraClienteTable, BorderLayout.CENTER);
 	}
 	
@@ -77,15 +64,16 @@ public class HojaRutaPanel extends JPanel {
         };
     }
 	
-//	public ActionListener eventoBotonAdd(){
-//        return new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//            	FormPedidoAgregar formPedidoAgregar = new FormPedidoAgregar();
-//            	PedidoDAO pedidoDAO = new PedidoDAO();
-//        		List<Pedido> pedidos = pedidoDAO.getPedidos();
-//        		pedidoTable.vaciarTabla();
-//        		agregarTodos(pedidos);
-//            }
-//        };
-//    }
+	public ActionListener eventoBotonAdd(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	//FormPedidoAgregar formPedidoAgregar = new FormPedidoAgregar();
+            	FormHojaRutaAgregar formHojaRutaAgregar = new FormHojaRutaAgregar();
+            	//PedidoDAO pedidoDAO = new PedidoDAO();
+        		//List<Pedido> pedidos = pedidoDAO.getPedidos();
+        		//pedidoTable.vaciarTabla();
+        		//agregarTodos(pedidos);
+            }
+        };
+    }
 }

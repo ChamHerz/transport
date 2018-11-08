@@ -17,7 +17,6 @@ public class CamionPanel extends JPanel {
 	private MiScrollTable barraCamionTable;
 	private CamionTable camionTable;
 	
-	@SuppressWarnings("unused")
 	public CamionPanel() {
 		super();
 		camionTable = new CamionTable();

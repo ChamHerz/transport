@@ -17,6 +17,7 @@ public class BarraHerramienta extends JToolBar {
     private BarraBoton botonCiudad;
     private BarraBoton botonCarretera;
     private BarraBoton botonRuta;
+    private BarraBoton botonRutaDetalle;
     private BarraBoton botonHojaRuta;
     private BarraBoton botonMovCaja;
     private BarraBoton botonTarifa;
@@ -32,6 +33,7 @@ public class BarraHerramienta extends JToolBar {
         botonCiudad = new BarraBoton("Ciudad","/images/icon-ciudad.png");
         botonCarretera = new BarraBoton("Carretera","/images/icon-carretera.png");
         botonRuta = new BarraBoton("Ruta","/images/icon-ruta.png");
+        botonRutaDetalle = new BarraBoton("Ruta Detalle","/images/icon-ruta.png");
         botonHojaRuta = new BarraBoton("Hoja de Ruta","/images/icon-hoja-de-ruta.png");
         botonMovCaja = new BarraBoton("Movimiento de Caja","/images/icon-caja.png");
         botonTarifa = new BarraBoton("Tarifa","/images/icon-tarifa.png");
@@ -46,6 +48,7 @@ public class BarraHerramienta extends JToolBar {
         this.add(botonCiudad);
         this.add(botonCarretera);
         this.add(botonRuta);
+        this.add(botonRutaDetalle);
         this.add(botonMovCaja);
         this.add(botonTarifa);
         this.add(botonSetting);
@@ -89,6 +92,10 @@ public class BarraHerramienta extends JToolBar {
     
     public void setEventoBotonRuta(ActionListener unActionListener) {
         botonRuta.addActionListener(unActionListener);
+    }
+    
+    public void setEventoBotonRutaDetalle(ActionListener unActionListener) {
+        botonRutaDetalle.addActionListener(unActionListener);
     }
     
     public void setEventoBotonHojaRuta(ActionListener unActionListener) {

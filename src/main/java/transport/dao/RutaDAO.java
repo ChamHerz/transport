@@ -10,6 +10,14 @@ import transport.model.Ruta;
 
 public class RutaDAO {
 	
+	public Ruta getRuta(int idRuta) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Ruta ruta = (Ruta) session.get(Ruta.class, idRuta);
+		session.getTransaction().commit();
+		return ruta;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Ruta> getRutas() {
 		Session session = HibernateUtil.getSessionFactory().openSession();

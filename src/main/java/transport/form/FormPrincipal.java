@@ -23,6 +23,7 @@ import transport.panel.ConfigPanel;
 import transport.panel.HojaRutaPanel;
 import transport.panel.PedidoPanel;
 import transport.panel.RemolquePanel;
+import transport.panel.RutaDetallePanel;
 import transport.panel.RutaPanel;
 
 public class FormPrincipal extends JFrame {
@@ -41,6 +42,7 @@ public class FormPrincipal extends JFrame {
 	private ClientePanel clientePanel;
 	private PedidoPanel pedidoPanel;
 	private RutaPanel rutaPanel;
+	private RutaDetallePanel rutaDetallePanel;
 	private HojaRutaPanel hojaRutaPanel;
 	
 	public FormPrincipal() throws HeadlessException {
@@ -64,6 +66,7 @@ public class FormPrincipal extends JFrame {
         barraHerramientas.setEventoBotonCliente(eventoClickBarraCliente());
         barraHerramientas.setEventoBotonPedido(eventoClickBarraPedido());
         barraHerramientas.setEventoBotonRuta(eventoClickBarraRuta());
+        barraHerramientas.setEventoBotonRutaDetalle(eventoClickBarraRutaDetalle());
         barraHerramientas.setEventoBotonHojaRuta(eventoClickBarraHojaRuta());
         this.getContentPane().add(barraHerramientas, BorderLayout.NORTH);
         
@@ -81,6 +84,7 @@ public class FormPrincipal extends JFrame {
         clientePanel = new ClientePanel();
         pedidoPanel = new PedidoPanel();
         rutaPanel = new RutaPanel();
+        rutaDetallePanel = new RutaDetallePanel();
         hojaRutaPanel = new HojaRutaPanel();
 	}
 	
@@ -153,6 +157,14 @@ public class FormPrincipal extends JFrame {
         return new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 tabPanel.showPanel(rutaPanel);
+            }
+        };
+    }
+    
+    public ActionListener eventoClickBarraRutaDetalle(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tabPanel.showPanel(rutaDetallePanel);
             }
         };
     }

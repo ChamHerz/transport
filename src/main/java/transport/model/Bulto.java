@@ -22,11 +22,13 @@ public class Bulto {
 	private Ciudad ciudadOrigen;
 	private Integer idCiudadDestino;
 	private Ciudad ciudadDestino;
+	private Integer idRemolque;
 	private BigDecimal pesoKG;
 	private BigDecimal volumenM3;
 	private BigDecimal distanciaKM;
 	private BigDecimal costo;
 	private Integer idEstado;
+	private Estado estado;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -86,6 +88,15 @@ public class Bulto {
 	}
 	
 	@Basic
+	@Column(name = "idRemolque")
+	public Integer getIdRemolque() {
+		return idRemolque;
+	}
+	public void setIdRemolque(Integer idRemolque) {
+		this.idRemolque = idRemolque;
+	}
+	
+	@Basic
 	@Column(name = "pesoKG")
 	public BigDecimal getPesoKG() {
 		return pesoKG;
@@ -130,12 +141,24 @@ public class Bulto {
 		this.idEstado = idEstado;
 	}
 	
+	@ManyToOne(targetEntity = Estado.class, optional = true)
+    @JoinColumn(name = "idEstado",referencedColumnName="idEstado",
+    insertable = false, updatable = false, nullable = true)
+	public Estado getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+	
 	@Transient
 	public Object[] getObject() {
 		Object[] item = {
 				idBulto,
 				(ciudadOrigen == null) ? "" : ciudadOrigen.getNombre(),
 				(ciudadDestino == null) ? "" : ciudadDestino.getNombre(),
+				estado.getEstado(),
+				idRemolque,
 				pesoKG,
 				volumenM3,
 				distanciaKM,

@@ -12,7 +12,7 @@ import transport.model.Bulto;
 public class BultoDAO {
 	
 	public void addBulto(Bulto bulto) {
-		bulto.setIdEstado(0);
+		bulto.setIdEstado(1);
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		session.save(bulto);
@@ -49,6 +49,23 @@ public class BultoDAO {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		Criteria criteria = session.createCriteria(Bulto.class);
+		List<Bulto> bultos = null;
+		try {
+			bultos = (List<Bulto>)criteria.list();
+		} catch (Exception e) {
+			
+		} finally {
+			session.getTransaction().commit();
+		}
+		return bultos;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Bulto> getBultosSinRemolques() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Criteria criteria = session.createCriteria(Bulto.class);
+		criteria.add(Restrictions.eq("idEstado",1));
 		List<Bulto> bultos = null;
 		try {
 			bultos = (List<Bulto>)criteria.list();
