@@ -5,20 +5,28 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import transport.control.BotonNormal;
+import transport.dao.BultoDAO;
 import transport.dao.ConductorDAO;
+import transport.dao.HojaRutaDAO;
+import transport.dao.RemolqueDAO;
 import transport.dao.RutaDAO;
 import transport.dialog.DialogConductorSeleccionar;
 import transport.dialog.DialogDespacharBulto;
 import transport.dialog.DialogRutaSeleccionar;
+import transport.model.Bulto;
 import transport.model.Camion;
 import transport.model.Conductor;
+import transport.model.HojaRuta;
 import transport.model.Remolque;
 import transport.model.Ruta;
 import transport.model.RutaDetalle;
@@ -36,7 +44,10 @@ public class FormHojaRutaAgregar extends MiForm{
 	private FormHojaRutaAgregar formHojaRutaAgregar = this;
 	private static final String titulo = "Nueva Hoja de Ruta";
 	//REMOLQUES ACTUALES;
+	Conductor conductor = null;
+	Ruta ruta = null;
 	List<Remolque> remolques;
+	List<Bulto> bultos = new ArrayList<Bulto>(); //arranca vacia
 	
 	private JPanel panelSuperior = new JPanel();
 	private JPanel panelIzquierdo = new JPanel();
@@ -72,6 +83,10 @@ public class FormHojaRutaAgregar extends MiForm{
 	private MiScrollTable barraBultoTable;
 	private BultoTable bultoTable;
 	private BotonNormal botonSeleccionarBulto = new BotonNormal("Seleccionar Bulto","/images/icon-add-24.png");
+	private BotonNormal botonQuitarBulto = new BotonNormal("Quitar Bulto","/images/icon-delete.png");
+	
+	//PANEL INFERIOR
+	private BotonNormal botonConfirmarHojaRuta = new BotonNormal("Confirmar Hoja Ruta","/images/icon-add-24.png");
 	
 	public FormHojaRutaAgregar() {
 		super(titulo);
@@ -86,8 +101,7 @@ public class FormHojaRutaAgregar extends MiForm{
 		add(panelCentral,BorderLayout.CENTER);
 		add(panelInferior,BorderLayout.SOUTH);
 		
-		panelInferior.add(new JLabel("panelInferior"));
-		
+				
 		//PANEL SUPERIOS
 		panelSuperior.setLayout(new BorderLayout());
 		panelSuperior.add(panelSuperiorArriba,BorderLayout.NORTH);
@@ -115,7 +129,6 @@ public class FormHojaRutaAgregar extends MiForm{
 		
 		rutaDetalleTable = new RutaDetalleTable();
 		barraRutaDetalle = new MiScrollTable(rutaDetalleTable);
-			
 		barraRutaDetalle.setPreferredSize(new Dimension(200, 190));
 		panelIzquierdo.add(barraRutaDetalle,BorderLayout.CENTER);
 		
@@ -153,8 +166,19 @@ public class FormHojaRutaAgregar extends MiForm{
 		barraBultoTable = new MiScrollTable(bultoTable);
 		//bultoTable.agregarDesdeRemolques(remolques);
 		panelCentralCentral.add(barraBultoTable,BorderLayout.CENTER);
-		panelBultosDerecha.add(botonSeleccionarBulto);
+		panelBultosDerecha.setLayout(new BorderLayout());
+		JPanel panelBotonera = new JPanel();
+		panelBultosDerecha.add(panelBotonera,BorderLayout.NORTH);
+		panelBotonera.setLayout(new BorderLayout());
+		panelBotonera.add(botonSeleccionarBulto,BorderLayout.NORTH);
+		panelBotonera.add(botonQuitarBulto,BorderLayout.SOUTH);
 		botonSeleccionarBulto.addActionListener(eventoSelecionarBulto());
+		botonQuitarBulto.addActionListener(eventoQuitarBulto());
+		
+		//PANEL INFERIOR
+		panelInferior.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		panelInferior.add(botonConfirmarHojaRuta);
+		botonConfirmarHojaRuta.addActionListener(eventoConfirmarHojaRuta());
 		
 		
 		pack();
@@ -180,7 +204,7 @@ public class FormHojaRutaAgregar extends MiForm{
 	
 	public void conductorSeleecionado(int idConductorSelect) {
 		ConductorDAO conductorDAO = new ConductorDAO();
-		Conductor conductor = conductorDAO.getConductor(idConductorSelect);
+		conductor = conductorDAO.getConductor(idConductorSelect);
 		labelDatosConductor.setText(
 				String.format("idChofer: %d, nombre: %s, apellido: %s, dni: %s, telefono: %s",
 						conductor.getIdConductor(),
@@ -223,7 +247,7 @@ public class FormHojaRutaAgregar extends MiForm{
 	
 	public void rutaSelecionada(int idRutaSelect) {
 		RutaDAO rutaDAO = new RutaDAO();
-		Ruta ruta = rutaDAO.getRuta(idRutaSelect);
+		ruta = rutaDAO.getRuta(idRutaSelect);
 		List<RutaDetalle> rutaDetalles = ruta.getRutaDetalle();
 		rutaDetalleTable.borrarTodoLuegoAgregar(rutaDetalles);
 	}
@@ -231,15 +255,97 @@ public class FormHojaRutaAgregar extends MiForm{
 	public ActionListener eventoSelecionarBulto(){
         return new ActionListener() {
             public void actionPerformed(ActionEvent e) {         	
-            	DialogDespacharBulto dialogDespacharBulto = new DialogDespacharBulto(formHojaRutaAgregar,remolques);
-            	int idBultoSelect = dialogDespacharBulto.showDialog();
-            	if (idBultoSelect != -1)
-            		bultoDespachado(idBultoSelect);
+            	DialogDespacharBulto dialogDespacharBulto = new DialogDespacharBulto(
+            			formHojaRutaAgregar,
+            			remolques,
+            			bultos);
+            	Bulto bultoSelect = dialogDespacharBulto.showDialog();
+            	if (bultoSelect != null) {
+            		bultos.add(bultoSelect);
+            		bultoTable.borrarTodoLuegoAgregar(bultos);
+            		calcularTotales();
+            	}
+            		
             }
         };
     }
 	
-	public void bultoDespachado(int idBultoDespachado) {
+	public void calcularTotales() {
 		
+		BigDecimal pesoTotal;
+		BigDecimal volumenTotal;
+		Integer cantidadBultos;
+		
+		for (Remolque remolque : remolques) {
+			pesoTotal = BigDecimal.ZERO;
+			volumenTotal = BigDecimal.ZERO;
+			cantidadBultos = 0;
+			for (Bulto bulto : bultos) {
+				if (bulto.getIdRemolque() == remolque.getIdRemolque()) {
+					pesoTotal = pesoTotal.add(bulto.getPesoKG());
+					volumenTotal = volumenTotal.add(bulto.getVolumenM3());
+					cantidadBultos = cantidadBultos + 1;
+				}
+			}
+			remolque.setPesoActual(pesoTotal);
+			remolque.setVolumenActual(volumenTotal);
+			remolque.setCantidadBultos(cantidadBultos);
+		}
+		
+		remolqueTable.borrarTodoLuegoAgregar(remolques);
 	}
+	
+	public ActionListener eventoQuitarBulto(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {         	
+            	Integer idBulto = bultoTable.getIdSelected();
+            	if (idBulto != null) {
+            		bultos.removeIf(unBulto -> unBulto.getIdBulto() == idBulto);
+            		bultoTable.borrarTodoLuegoAgregar(bultos);
+            		calcularTotales();
+            	}
+            }
+        };
+    }
+	
+	public ActionListener eventoConfirmarHojaRuta(){
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {         	
+            	if (ruta == null) {
+            		JOptionPane.showMessageDialog(formHojaRutaAgregar, "No selecciono ruta", "Error", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+            	if (conductor == null) {
+            		JOptionPane.showMessageDialog(formHojaRutaAgregar, "No selecciono chofer", "Error", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+            	if (bultos.isEmpty()) {
+            		JOptionPane.showMessageDialog(formHojaRutaAgregar, "Bultos vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            		return;
+            	}
+            	//TODOS LOS DATOS ESTAS
+            	//AGREGO LA HOJA DE RUTA
+            	HojaRuta hojaRuta = new HojaRuta();
+            	hojaRuta.setIdRuta(ruta.getIdRuta());
+            	hojaRuta.setIdConductor(conductor.getIdConductor());
+            	HojaRutaDAO hojaRutaDAO = new HojaRutaDAO();
+            	hojaRuta = hojaRutaDAO.agregar(hojaRuta);
+            	
+            	//ACTUALIZO LOS REMOLQUES
+            	RemolqueDAO remolqueDAO = new RemolqueDAO();
+            	for (Remolque remolque : remolques) {
+            		remolqueDAO.updateCantidadesRemolque(remolque);
+            	}
+            	
+            	//ACTUALIZO LOS BULTOS
+            	BultoDAO bultoDAO = new BultoDAO();
+            	for (Bulto bulto : bultos) {
+            		bultoDAO.updateBultoRemolque(bulto);
+            	}
+            	
+            	formHojaRutaAgregar.setVisible(false);
+            	formHojaRutaAgregar.dispose();
+            }
+        };
+    }
 }

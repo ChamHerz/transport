@@ -7,6 +7,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import transport.form.FormPedidoDetalle;
+import transport.model.Bulto;
 import transport.model.Cliente;
 import transport.model.HojaRuta;
 import transport.model.Pedido;
@@ -46,4 +47,12 @@ public class HojaRutaTable extends MiTabla {
 			modeloTabla.addRow(hojaRuta.getObject());
 	}
 
+	public void borrarTodoLuegoAgregar(List<HojaRuta> hojaRutas) {
+		for (int i = 0; i < getRowCount(); i++) {
+			modeloTabla.removeRow(i);
+			i-=1;
+		}
+		for (HojaRuta hojaRuta : hojaRutas)
+			modeloTabla.addRow(hojaRuta.getObject());
+	}
 }

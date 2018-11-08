@@ -67,12 +67,10 @@ public class HojaRutaPanel extends JPanel {
 	public ActionListener eventoBotonAdd(){
         return new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	//FormPedidoAgregar formPedidoAgregar = new FormPedidoAgregar();
             	FormHojaRutaAgregar formHojaRutaAgregar = new FormHojaRutaAgregar();
-            	//PedidoDAO pedidoDAO = new PedidoDAO();
-        		//List<Pedido> pedidos = pedidoDAO.getPedidos();
-        		//pedidoTable.vaciarTabla();
-        		//agregarTodos(pedidos);
+            	HojaRutaDAO hojaRutaDAO = new HojaRutaDAO();
+            	List<HojaRuta> hojaRutas = hojaRutaDAO.getHojaRutas();
+            	hojaRutaTable.borrarTodoLuegoAgregar(hojaRutas);
             }
         };
     }

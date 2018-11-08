@@ -11,6 +11,17 @@ import transport.model.Bulto;
 
 public class BultoDAO {
 	
+	public void updateBultoRemolque(Bulto bulto) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Bulto bultoDos = (Bulto) session.get(Bulto.class, bulto.getIdBulto());
+		bultoDos.setIdEstado(bulto.getIdEstado());
+		bultoDos.setEstado(bulto.getEstado());
+		bultoDos.setIdRemolque(bulto.getIdRemolque());
+		session.update(bultoDos);
+		session.getTransaction().commit();
+	}
+	
 	public void addBulto(Bulto bulto) {
 		bulto.setIdEstado(1);
 		Session session = HibernateUtil.getSessionFactory().openSession();

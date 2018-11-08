@@ -16,6 +16,7 @@ import transport.dao.CiudadDAO;
 import transport.dao.TarifaDAO;
 import transport.model.Bulto;
 import transport.model.Ciudad;
+import transport.model.Estado;
 import transport.model.Tarifa;
 
 public class DialogBultoAgregar extends MiDialog {
@@ -169,6 +170,11 @@ public class DialogBultoAgregar extends MiDialog {
 	
 	public Bulto showDialog() {
 	    setVisible(true);
+	    bulto.setIdEstado(1);
+	    Estado estado = new Estado();
+    	estado.setIdEstado(1);
+    	estado.setEstado("SIN REMOLQUE");
+    	bulto.setEstado(estado);
 	    return this.bulto;
 	}
 	

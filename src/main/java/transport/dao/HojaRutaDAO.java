@@ -11,6 +11,14 @@ import transport.model.Pedido;
 
 public class HojaRutaDAO {
 	
+	public HojaRuta agregar(HojaRuta hojaRuta) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.save(hojaRuta);
+		session.getTransaction().commit();
+		return hojaRuta;
+	}
+	
 	public HojaRuta get(int idHojaRuta) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
